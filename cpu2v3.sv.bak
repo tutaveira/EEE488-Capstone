@@ -1,0 +1,95 @@
+// cpu2v3.sv
+module cpu2v3
+ #( Wwid = 6, aW = 6 )
+  ( output logic [aW-1:0]   memAddr,
+    input  logic [Wwid-1:0] readData,
+    output logic [Wwid-1:0] writeData,
+    output logic            writeEn,
+    output logic            ohalt,
+    output logic            oretire,
+    input  logic 	    clk,
+    input  logic 	    rst	       );
+
+  // Including the signal declaration file (sig_declare.inc) here. Execute the perl scrupt mkurom (./mkurom) for generation
+	`include "sig_declare.inc";
+
+  // Data path buses declaration statements
+	parameter bW = Wwid;
+	logic [bW-1:0] MEM, MAR, IR, PC, ACC, ALU, Z, DBus;	
+	assign writeData = DBus;
+	assign MEM = readData;
+
+  // Mirco instruction pointer (UIP) and other sequencing engine buses
+        logic [ua-1:0] UIP, ID, nextUIP;
+
+  // Paging Buses
+	logic PG;
+	logic [bW-1:0] BPR, PTE;
+
+  // The signals halt, retire and writeEn are outputs from this module but are specified from the microcode as follows 
+   	assign ohalt   = halt;
+  	assign oretire = retire;
+	assign writeEn = MEMen;
+
+  // Instantiation of the microstore (US) and instruction decoder (ID) modules
+ 	ID__ #(ua) my_id ( .IR (IR) , .Uip(ID)  );
+	US__   my_ustore ( .Uip(UIP), .sig(sig) );
+
+  // Sequencing Engine hardware:
+  // This section includes the instantiation of the micro instruction pointer register (UIP) along with a MUX (between the ID and UIP) that drives nextUIP
+
+	dff #(ua) myUIP( .d(nextUIP), .q(UIP), .clk(clk), .en(!halt), .rst(rst) );
+
+	always_comb begin
+	    unique case (1'b1)
+		id2uip  : nextUIP = ID;
+		gofetch : nextUIP = '0;
+		halt    : nextUIP = UIP;
+		default : nextUIP = UIP + 1'b1;
+	    endcase
+	end
+
+  // Data Path Hardware:
+  // Invoking the MAR, PC, IR, Z and ACC as registers for the data path. There is also a MUX that drives the bus based upon the out values from "sig"  
+
+	dff #(bW) myMAR( .d(DBus), .q(MAR), .clk(clk), .en(MARen) , .rst(rst) );
+	dff #(bW) myPC ( .d(DBus), .q(PC) , .clk(clk), .en(PCen)  , .rst(rst) );
+	dff #(bW) myIR ( .d(DBus), .q(IR) , .clk(clk), .en(IRen)  , .rst(rst) );
+	dff #(bW) myZ  ( .d(ALU) , .q(Z)  , .clk(clk), .en(aluinc), .rst(rst) );
+
+	memory #( .bW(bW), .eC(4) ) 
+	myACC   ( .writeAddr(IR[1:0]), .readAddr(IR[1:0]), .writeData(DBus), .readData(ACC), .writeEn(ACCen), .clk(clk) ); 
+
+	always_comb begin
+	    unique case (1'b1)
+		MEMout : DBus = MEM;
+		PCout  : DBus = PC;
+		Zout   : DBus = Z;
+		ACCout : DBus = ACC;
+		default: DBus = '0;
+	    endcase
+	end
+	
+  // Paging Hardware:
+
+	dff #(bW) myPTE( .d(DBus),  .q(PTE), .clk(clk), .en(PTEen), .rst(rst) );
+	dff #(bW) myBPR( .d(DBus),  .q(BPR), .clk(clk), .en(BPRen), .rst(rst) );
+	dff #(1)  myPG ( .d(IR[0]), .q(PG) , .clk(clk), .en(PGen) , .rst(rst) );	
+
+	always_comb begin 
+	    priority case (1'b1)
+		!PG  	: memAddr = { 2'd0, MAR }; 
+		PTEen   : memAddr = { BPR, MAR[5:4] };
+		PTEout  : memAddr = { PTE[5:2], MAR[3:0] };
+		default : memAddr = { 2'd0, MAR };
+	    endcase
+	end
+ 
+  // The ALU:
+	always_comb begin
+  	    unique case (1'b1)
+    		aluinc:  ALU = DBus + 1'b1;
+    		default: ALU = '0;
+  	    endcase
+	end
+  endmodule

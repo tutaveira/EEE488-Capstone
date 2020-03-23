@@ -1,0 +1,332 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2018  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+# Date created = 12:06:40  February 28, 2020
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		cpu2v3_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CEBA4F23C7
+set_global_assignment -name TOP_LEVEL_ENTITY cpu2v3
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.1.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:06:39  FEBRUARY 28, 2020"
+set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_U13 -to rst -comment SW0
+set_location_assignment PIN_V13 -to SW1
+set_location_assignment PIN_U7 -to KEY0
+set_global_assignment -name SYSTEMVERILOG_FILE cpu2v3.sv
+set_global_assignment -name SOURCE_FILE cpu_perl_script
+set_global_assignment -name SOURCE_FILE microcode
+set_global_assignment -name INCLUDE_FILE sig_declare.inc
+set_global_assignment -name SYSTEMVERILOG_FILE display.sv
+set_global_assignment -name SYSTEMVERILOG_FILE hexdisplay.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ustore.sv
+set_global_assignment -name SYSTEMVERILOG_FILE memory.sv
+set_global_assignment -name SYSTEMVERILOG_FILE id.sv
+set_global_assignment -name SYSTEMVERILOG_FILE flipflop.sv
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/sequencer_trk_mgr.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/sequencer_scc_sv_wrapper.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/sequencer_scc_sv_phase_decode.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/sequencer_scc_siii_wrapper.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/sequencer_scc_siii_phase_decode.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/sequencer_scc_reg_file.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/sequencer_scc_mgr.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/sequencer_scc_acv_wrapper.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/sequencer_scc_acv_phase_decode.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/sequencer_reg_file.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/sequencer_phy_mgr.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/sequencer_data_mgr.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_rsp_mux_004.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_rsp_mux_003.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_rsp_mux_001.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_rsp_mux.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_rsp_demux.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_router_009.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_router_008.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_router_007.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_router_006.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_router_005.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_router_004.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_router_003.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_router_002.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_router_001.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_router.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_cmd_mux_002.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_cmd_mux_001.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_cmd_mux.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_cmd_demux_004.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_cmd_demux_003.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_cmd_demux_001.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_cmd_demux.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_avalon_st_adapter_error_adapter_0.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0_avalon_st_adapter.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_mm_interconnect_0.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0_irq_mapper.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_s0.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_pll0.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_write_datapath.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_simple_ddio_out.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_reset_sync.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_reset.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_read_valid_selector.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_read_datapath.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_phy_csr.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_new_io_pads.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_memphy.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_iss_probe.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_fr_cycle_shifter.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_fr_cycle_extender.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_flop_mem.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_clock_pair_generator.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_altdqdqs.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_addr_cmd_pads.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_addr_cmd_datapath.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0_acv_ldc.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_p0.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_mm_interconnect_0.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_dmaster_timing_adt.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_dmaster_p2b_adapter.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_dmaster_b2p_adapter.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_dmaster.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_c0.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller_0002.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/SDRAM_Controller.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_write_decoder.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_read_datapath.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_ram_csr.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_ram.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_pattern_fifo.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_lpddr2.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_lfsr72.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_lfsr36.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_lfsr12.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_jumplogic.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_inst_ROM_reg.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_inst_ROM_no_ifdef_params.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_generic.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_dm_decoder.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_di_buffer_wrap.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_di_buffer.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_datamux.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_data_decoder.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_data_broadcast.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_core.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_bitcheck.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_ac_ROM_reg.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/rw_manager_ac_ROM_no_ifdef_params.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_std_synchronizer_nocut.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_reset_synchronizer.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_reset_controller.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_merlin_traffic_limiter.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_merlin_slave_translator.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_merlin_slave_agent.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_merlin_reorder_memory.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_merlin_master_translator.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_merlin_master_agent.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_merlin_burst_uncompressor.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_merlin_arbitrator.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_mem_if_sequencer_rst.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_mem_if_sequencer_mem_no_ifdef_params.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_mem_if_sequencer_cpu_cv_synth_cpu_inst_test_bench.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_mem_if_sequencer_cpu_cv_synth_cpu_inst.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_mem_if_oct_cyclonev.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_mem_if_dll_cyclonev.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_jtag_streaming.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_jtag_sld_node.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_jtag_dc_streaming.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_avalon_st_pipeline_stage.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_avalon_st_pipeline_base.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_avalon_st_packets_to_bytes.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_avalon_st_jtag_interface.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_avalon_st_idle_remover.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_avalon_st_idle_inserter.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_avalon_st_clock_crosser.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_avalon_st_bytes_to_packets.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_avalon_sc_fifo.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_avalon_packets_to_master.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altera_avalon_mm_bridge.v"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/altdq_dqs2_acv_cyclonev_lpddr2.sv"
+set_global_assignment -name SYSTEMVERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_if_nextgen_lpddr2_controller_core.sv"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_wdata_path.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_timing_param.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_tbp.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_sideband.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_rdwr_data_tmg.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_rdata_path.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_rank_timer.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_odt_gen.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_mm_st_converter.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_lpddr2_addr_cmd.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_list.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_input_if.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_fifo.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_ecc_encoder_decoder_wrapper.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_ecc_encoder_64_syn.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_ecc_encoder_32_syn.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_ecc_encoder.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_ecc_decoder_64_syn.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_ecc_decoder_32_syn.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_ecc_decoder.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_ddr3_odt_gen.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_ddr2_odt_gen.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_dataid_manager.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_csr.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_controller_st_top.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_controller.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_cmd_gen.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_burst_tracking.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_burst_gen.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_buffer_manager.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_buffer.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_axi_st_converter.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_arbiter.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_addr_cmd_wrap.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/alt_mem_ddrx_addr_cmd.v"
+set_global_assignment -name VERILOG_FILE "../../../Quartus/Projects/EEE488-Capstone/afi_mux_lpddr2.v"
+set_location_assignment PIN_T12 -to aon -disable
+set_location_assignment PIN_AA15 -to dbg -disable
+set_location_assignment PIN_U7 -to clr -disable
+set_location_assignment PIN_AA2 -to LED_SW[0] -disable
+set_location_assignment PIN_AA1 -to LED_SW[1] -disable
+set_location_assignment PIN_W2 -to LED_SW[2] -disable
+set_location_assignment PIN_Y3 -to LED_SW[3] -disable
+set_location_assignment PIN_N2 -to LED_SW[4] -disable
+set_location_assignment PIN_U1 -to LED7 -disable
+set_location_assignment PIN_U21 -to HEX0[0]
+set_location_assignment PIN_V21 -to HEX0[1]
+set_location_assignment PIN_W22 -to HEX0[2]
+set_location_assignment PIN_W21 -to HEX0[3]
+set_location_assignment PIN_Y22 -to HEX0[4]
+set_location_assignment PIN_Y21 -to HEX0[5]
+set_location_assignment PIN_AA22 -to HEX0[6]
+set_location_assignment PIN_AA20 -to HEX1[0]
+set_location_assignment PIN_AB20 -to HEX1[1]
+set_location_assignment PIN_AA19 -to HEX1[2]
+set_location_assignment PIN_AA18 -to HEX1[3]
+set_location_assignment PIN_AB18 -to HEX1[4]
+set_location_assignment PIN_AA17 -to HEX1[5]
+set_location_assignment PIN_U22 -to HEX1[6]
+set_location_assignment PIN_Y19 -to HEX2[0]
+set_location_assignment PIN_AB17 -to HEX2[1]
+set_location_assignment PIN_AA10 -to HEX2[2]
+set_location_assignment PIN_Y14 -to HEX2[3]
+set_location_assignment PIN_V14 -to HEX2[4]
+set_location_assignment PIN_AB22 -to HEX2[5]
+set_location_assignment PIN_AB21 -to HEX2[6]
+set_location_assignment PIN_V16 -to HEX3[3]
+set_location_assignment PIN_U17 -to HEX3[4]
+set_location_assignment PIN_V18 -to HEX3[5]
+set_location_assignment PIN_V19 -to HEX3[6]
+set_location_assignment PIN_Y16 -to HEX3[0]
+set_location_assignment PIN_W16 -to HEX3[1]
+set_location_assignment PIN_Y17 -to HEX3[2]
+set_location_assignment PIN_U20 -to HEX4[0]
+set_location_assignment PIN_Y20 -to HEX4[1]
+set_location_assignment PIN_V20 -to HEX4[2]
+set_location_assignment PIN_U16 -to HEX4[3]
+set_location_assignment PIN_U15 -to HEX4[4]
+set_location_assignment PIN_Y15 -to HEX4[5]
+set_location_assignment PIN_P9 -to HEX4[6]
+set_location_assignment PIN_N9 -to HEX5[0]
+set_location_assignment PIN_M8 -to HEX5[1]
+set_location_assignment PIN_T14 -to HEX5[2]
+set_location_assignment PIN_P14 -to HEX5[3]
+set_location_assignment PIN_C1 -to HEX5[4]
+set_location_assignment PIN_C2 -to HEX5[5]
+set_location_assignment PIN_W19 -to HEX5[6]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LED_SW[0] -disable
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LED_SW[1] -disable
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LED_SW[2] -disable
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LED_SW[3] -disable
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LED_SW[4] -disable
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LED7 -disable
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX0[0]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX0[1]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX0[2]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX0[3]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX0[4]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX0[5]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX0[6]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX1[0]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX1[1]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX1[2]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX1[3]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX1[4]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX1[5]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX1[6]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX2[0]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX2[1]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX2[2]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX2[3]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX2[4]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX2[5]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX2[6]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX3[3]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX3[4]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX3[5]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX3[6]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX3[0]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX3[1]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX3[2]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX4[0]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX4[1]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX4[2]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX4[3]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX4[4]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX4[5]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX4[6]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX5[0]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX5[1]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX5[2]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX5[3]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX5[4]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX5[5]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to HEX5[6]
+set_location_assignment PIN_T13 -to SW2 -disable
+set_location_assignment PIN_M7 -to KEY2 -disable
+set_location_assignment PIN_M6 -to KEY3 -disable
+set_location_assignment PIN_L1 -to sclk -disable
+set_instance_assignment -name IO_STANDARD "2.5 V" -to sclk -disable
+set_location_assignment PIN_M9 -to bclk
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

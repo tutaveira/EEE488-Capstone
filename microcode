@@ -1,0 +1,105 @@
+# simplecpu
+#
+# format
+#    SIG    name [ name ]*
+#    SIGd   name [ name ]*
+#
+# Notes:
+#    signal order is significant
+#    SIG is the same as SIG1, a 1 bit signal
+#    name can be an _ which is a 0 bit signal non-unique name inserted for readability
+#
+#    CONST   name [ name ]      # defines constants 0, 1, ...
+#
+# using signals:  name   or name=num
+#     signal ranges are not checked, num can be a number or a defined constant
+#     order of using signals is irrelevant
+#     signal list end at Eol
+#     upc is advanced at Eol
+#
+# mnemonic OPCODE  <bit pattern>
+#     bit pattern must be casex acceptible (with ? and _)
+#     mnemonic is used to generate assembler
+#
+# label: <Eol>    # defines a uaddr constant with value of upc
+#
+# Note that symbols with names starting with UC_ will have their
+# names and values written to the sig_declare file
+# If you want a microcode address constant, this is how you access
+# it from verilog. (other than the constants in the instruction decoder)
+
+# Signals:
+SIG   MARen PCen IRen ACCen Zen MEMen BPRen PGen PTEen
+SIG   PCout ACCout Zout MEMout PTEout 
+SIG   aluinc 
+SIG   id2uip gofetch
+SIG   retire
+SIG   halt
+
+# Fetch cycle begins at uip 0
+fetch:
+PCout MARen aluinc Zen
+MEMout PTEen
+MEMout PTEout IRen
+Zout PCen id2uip
+
+# DO NOT delete this UD_fault microcode it will be invoked if the opcode 
+# in the IR is illegal. The mkrom program expects this to be defined.
+UD_fault:
+halt retire
+
+#Microcode for the HALT instruction
+HALT  OPCODE   00_00_00
+halt retire
+
+#Microcode for the NOP instruction
+NOP   OPCODE   00_00_01
+retire gofetch
+
+# Microcode for the LOADI instruction
+LOADI  OPCODE   11_10_?? 
+PCout MARen aluinc Zen
+MEMout PTEen
+MEMout PTEout ACCen
+Zout PCen 
+retire gofetch
+
+# Microcode for the STORE instruction
+STORE  OPCODE   10_11_??
+PCout MARen aluinc Zen
+MEMout PTEen
+MEMout PTEout MARen
+MEMout PTEen
+ACCout PTEout MEMen
+Zout PCen
+retire gofetch
+
+# Microcode for the LOAD instruction
+LOAD  OPCODE   10_10_??
+PCout MARen aluinc Zen
+MEMout PTEen
+MEMout PTEout MARen
+MEMout PTEen
+MEMout PTEout ACCen
+Zout PCen
+retire gofetch
+
+# Microcode for the JUMP instruction
+JUMP  OPCODE   00_00_11
+PCout MARen
+MEMout PTEen 
+MEMout PTEout PCen 
+retire gofetch
+
+# Microcode for the LOADBPR instruction
+LOADBPR OPCODE 00_00_10
+PCout MARen aluinc Zen
+MEMout PTEen
+MEMout PTEout BPRen
+Zout PCen
+retire gofetch
+
+# Microcode for the SETPG instruction
+SETPG OPCODE 00_01_0?
+PGen
+retire gofetch
