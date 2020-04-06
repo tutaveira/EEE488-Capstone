@@ -1,50 +1,72 @@
-# simplecpu
+# a very simple machine--- not quite simplest, but simple
+# Created March 2017 by Seth Abraham
+# modified October 2017 by SA for 498 class demo
+# modified March 2018 by SA for spring 333 class
+# modified October 2018 by SA for fall 333 class
+# modified Jan 2019 by SA for spring 333 class
 #
 # format
 #    SIG    name [ name ]*
 #    SIGd   name [ name ]*
-#
-# Notes:
+#  Notes:
 #    signal order is significant
 #    SIG is the same as SIG1, a 1 bit signal
 #    name can be an _ which is a 0 bit signal non-unique name inserted for readability
 #
 #    CONST   name [ name ]      # defines constants 0, 1, ...
 #
-# using signals:  name   or name=num
+#   using signals:  name   or name=num
 #     signal ranges are not checked, num can be a number or a defined constant
 #     order of using signals is irrelevant
 #     signal list end at Eol
 #     upc is advanced at Eol
+#     
 #
-# mnemonic OPCODE  <bit pattern>
-#     bit pattern must be casex acceptible (with ? and _)
-#     mnemonic is used to generate assembler
+#   mnemonic OPCODE  <bit pattern>
+#    bit pattern must be casex acceptible (with ? and _)
+#    mnemonic is used to generate assembler
 #
-# label: <Eol>    # defines a uaddr constant with value of upc
+#    label: <Eol>    # defines a uaddr constant with value of upc
 #
 # Note that symbols with names starting with UC_ will have their
 # names and values written to the sig_declare file
 # If you want a microcode address constant, this is how you access
 # it from verilog. (other than the constants in the instruction decoder)
-
+#
+#
 # Signals:
-SIG   MARen PCen IRen ACCen Zen MEMen BPRen PGen PTEen
-SIG   PCout ACCout Zout MEMout PTEout 
-SIG   aluinc 
+#
+
+#only some signals are defined for you already
+#You must add whatever microcode signals you use
+#
+SIG   MARen PCen IRen ACCen Ren Zen T0en Len MEMen BPRen PGen PTEen
+SIG   PCout Aout Bout Zout MEMout Lout PTEout 
+SIG   aluinc
+SIG   store 
 SIG   id2uip gofetch
 SIG   retire
 SIG   halt
+SIG   write
 
+#
+#
 # Fetch cycle begins at uip 0
-fetch:
-PCout MARen aluinc Zen
-MEMout PTEen
-MEMout PTEout IRen
-Zout PCen id2uip
+#
 
-# DO NOT delete this UD_fault microcode it will be invoked if the opcode 
-# in the IR is illegal. The mkrom program expects this to be defined.
+#will need to modify this
+fetch:
+PCout MARen
+PCout aluinc Zen
+Zout PCen
+MEMout IRen
+id2uip
+
+#
+# DO NOT delete this UD_fault microcode
+# it will be invoked if the opcode in the IR is illegal
+# the mkrom program expects this to be defined
+#
 UD_fault:
 halt retire
 
@@ -52,54 +74,266 @@ halt retire
 HALT  OPCODE   00_00_00
 halt retire
 
-#Microcode for the NOP instruction
-NOP   OPCODE   00_00_01
+#
+#imm[31:12]  rd  0110111  LUI 
+#
+LUI OPCODE  ????????????????????_?????_0110111
+Zen
+Zout Ren
 retire gofetch
 
-# Microcode for the LOADI instruction
-LOADI  OPCODE   11_10_?? 
-PCout MARen aluinc Zen
-MEMout PTEen
-MEMout PTEout ACCen
-Zout PCen 
+#
+#imm[31:12]  rd  0010111  AUIPC 
+#
+AUIPC OPCODE  ????????????????????_?????_0010111
+PCout Zen
+Zout Ren
 retire gofetch
 
-# Microcode for the STORE instruction
-STORE  OPCODE   10_11_??
-PCout MARen aluinc Zen
-MEMout PTEen
-MEMout PTEout MARen
-MEMout PTEen
-ACCout PTEout MEMen
+#
+#imm[20|10:1|11|19:12]  rd  1101111  JAL 
+#
+JAL OPCODE  ????????????????????_?????_1101111
+PCout Zen
+Zout Ren
+retire gofetch
+
+#
+#imm[11:0]  rs1  000  rd  1100111  JALR 
+#
+JALR OPCODE  ????????????_?????_000_?????_1100111
+Aout Zen
+Zout Ren
+retire gofetch
+
+#
+#imm[12|10:5]  rs2  rs1  000  imm[4:1|11]  1100011  BEQ 
+#
+BEQ OPCODE  ???????_?????_?????_000_?????_1100011
+
+
+#
+#imm[12|10:5]  rs2  rs1  001  imm[4:1|11]  1100011  BNE 
+#
+BNE OPCODE  ???????_?????_?????_001_?????_1100011
+
+
+#
+#imm[12|10:5]  rs2  rs1  100  imm[4:1|11]  1100011  BLT 
+#
+BLT OPCODE  ???????_?????_?????_100_?????_1100011
+
+
+#
+#imm[12|10:5]  rs2  rs1  101  imm[4:1|11]  1100011  BGE 
+#
+BGE OPCODE  ???????_?????_?????_101_?????_1100011
+
+
+#
+#imm[12|10:5]  rs2  rs1  110  imm[4:1|11]  1100011  BLTU 
+#
+BLTU OPCODE  ???????_?????_?????_110_?????_1100011
+
+
+#
+#imm[12|10:5]  rs2  rs1  111  imm[4:1|11]  1100011  BGEU 
+#
+BGEU OPCODE  ???????_?????_?????_111_?????_1100011
+Bout T0en
+Aout Zen
 Zout PCen
 retire gofetch
 
-# Microcode for the LOAD instruction
-LOAD  OPCODE   10_10_??
-PCout MARen aluinc Zen
-MEMout PTEen
-MEMout PTEout MARen
-MEMout PTEen
-MEMout PTEout ACCen
-Zout PCen
+#
+#imm[11:0]  rs1  000  rd  0000011  LB 
+#
+LB OPCODE  ????????????_?????_000_?????_0000011
+
+
+#
+#imm[11:0]  rs1  001  rd  0000011  LH 
+#
+LH OPCODE  ????????????_?????_001_?????_0000011
+
+
+#
+#imm[11:0]  rs1  010  rd  0000011  LW 
+#
+LW OPCODE  ????????????_?????_010_?????_0000011
+
+
+#
+#imm[11:0]  rs1  100  rd  0000011  LBU 
+#
+LBU OPCODE  ????????????_?????_100_?????_0000011
+
+
+#
+#imm[11:0]  rs1  101  rd  0000011  LHU 
+#
+LHU OPCODE  ????????????_?????_101_?????_0000011
+Aout Zen
+Zout MARen
+MEMout Len
+Lout Ren
 retire gofetch
 
-# Microcode for the JUMP instruction
-JUMP  OPCODE   00_00_11
-PCout MARen
-MEMout PTEen 
-MEMout PTEout PCen 
+#
+#imm[11:5]  rs2  rs1  000  imm[4:0]  0100011  SB 
+#
+SB OPCODE  ???????_?????_?????_000_?????_0100011
+
+
+#
+#imm[11:5]  rs2  rs1  001  imm[4:0]  0100011  SH 
+#
+SH OPCODE  ???????_?????_?????_001_?????_0100011
+
+
+#
+#imm[11:5]  rs2  rs1  010  imm[4:0]  0100011  SW 
+#
+SW OPCODE  ???????_?????_?????_010_?????_0100011
+store MARen
+Bout T0en
+Zen
+Zout write
 retire gofetch
 
-# Microcode for the LOADBPR instruction
-LOADBPR OPCODE 00_00_10
-PCout MARen aluinc Zen
-MEMout PTEen
-MEMout PTEout BPRen
-Zout PCen
+#
+#imm[11:0]  rs1  000  rd  0010011  ADDI 
+#
+ADDI OPCODE  ????????????_?????_000_?????_0010011
+
+
+#
+#imm[11:0]  rs1  010  rd  0010011  SLTI 
+#
+SLTI OPCODE  ????????????_?????_010_?????_0010011
+
+
+#
+#imm[11:0]  rs1  011  rd  0010011  SLTIU 
+#
+SLTIU OPCODE  ????????????_?????_011_?????_0010011
+
+
+#
+#imm[11:0]  rs1  100  rd  0010011  XORI 
+#
+XORI OPCODE  ????????????_?????_100_?????_0010011
+
+
+#
+#imm[11:0]  rs1  110  rd  0010011  ORI 
+#
+ORI OPCODE  ????????????_?????_110_?????_0010011
+
+
+#
+#imm[11:0]  rs1  111  rd  0010011  ANDI 
+#
+ANDI OPCODE  ????????????_?????_111_?????_0010011
+
+
+#
+#0000000  shamt  rs1  001  rd  0010011  SLLI 
+#
+SLLI OPCODE  0000000_?????_?????_001_?????_0010011
+
+
+#
+#0000000  shamt  rs1  101  rd  0010011  SRLI 
+#
+SRLI OPCODE  0000000_?????_?????_101_?????_0010011
+
+
+#
+#0100000  shamt  rs1  101  rd  0010011  SRAI 
+#
+SRAI OPCODE  0100000_?????_?????_101_?????_0010011
+Aout Zen
+Zout Ren
 retire gofetch
 
-# Microcode for the SETPG instruction
-SETPG OPCODE 00_01_0?
-PGen
+#
+#0000000  rs2  rs1  000  rd  0110011  ADD 
+#
+ADD OPCODE  0000000_?????_?????_000_?????_0110011
+
+
+#
+#0100000  rs2  rs1  000  rd  0110011  SUB 
+#
+SUB OPCODE  0100000_?????_?????_000_?????_0110011
+
+
+#
+#0000000  rs2  rs1  001  rd  0110011  SLL 
+#
+SLL OPCODE  0000000_?????_?????_001_?????_0110011
+
+
+#
+#0000000  rs2  rs1  010  rd  0110011  SLT 
+#
+SLT OPCODE  0000000_?????_?????_010_?????_0110011
+
+
+#
+#0000000  rs2  rs1  011  rd  0110011  SLTU 
+#
+SLTU OPCODE  0000000_?????_?????_011_?????_0110011
+
+
+#
+#0000000  rs2  rs1  100  rd  0110011  XOR 
+#
+XOR OPCODE  0000000_?????_?????_100_?????_0110011
+
+
+#
+#0000000  rs2  rs1  101  rd  0110011  SRL 
+#
+SRL OPCODE  0000000_?????_?????_101_?????_0110011
+
+
+#
+#0100000  rs2  rs1  101  rd  0110011  SRA 
+#
+SRA OPCODE  0100000_?????_?????_101_?????_0110011
+
+
+#
+#0000000  rs2  rs1  110  rd  0110011  OR 
+#
+OR OPCODE  0000000_?????_?????_110_?????_0110011
+
+
+#
+#0000000  rs2  rs1  111  rd  0110011  AND 
+#
+AND OPCODE  0000000_?????_?????_111_?????_0110011
+Bout T0en
+Aout Zen
+Zout Ren
+retire gofetch
+
+#
+#fm  pred  succ  rs1  000  rd  0001111  FENCE 
+#
+FENCE OPCODE  ????????????_?????_000_?????_0001111
+retire gofetch
+
+#
+#000000000000  00000  000  00000  1110011  ECALL 
+#
+ECALL OPCODE  000000000000_00000_000_00000_1110011
+retire gofetch
+
+#
+#000000000001  00000  000  00000  1110011  EBREAK 
+#
+EBREAK OPCODE  000000000001_00000_000_00000_1110011
 retire gofetch
